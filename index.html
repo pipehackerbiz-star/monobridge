@@ -19,7 +19,7 @@
 <link rel="icon" type="image/png" href="assets/symbol-black.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!--
   남은 일
   1) 쿠팡 버튼 주소는 지금 쿠팡 검색 결과로 연결됩니다. 상품 페이지 주소가 생기면 바꾸세요. (coupang.com 으로 검색)
@@ -28,8 +28,8 @@
 -->
 <style>
 :root {
-  /* 구성: 사진이 주인공. 흰 바탕, 옅은 회색 면, 가는 선, 차분한 글자 크기.
-     12단 그리드에서 글과 사진을 좌우로 번갈아 놓는다. 검정은 버튼과 바닥글에만 쓴다. */
+  /* 구성: 첫 화면은 로고의 L과 O를 크게 쓴 흑백 구성. 그 아래는 컬러 사진과 흰 바탕, 옅은 회색 면, 가는 선.
+     12단 그리드에서 글과 사진을 좌우로 번갈아 놓는다. */
   --paper: #ffffff;
   --ink: #15171a;
   --mist: #f4f3f2;        /* 구역 배경: 따뜻한 쪽으로 살짝 기운 밝은 회색 */
@@ -83,18 +83,22 @@ a:focus-visible { outline: 3px solid var(--edge); outline-offset: 4px; }
 .top-nav a { text-decoration: none; padding-block: 6px; }
 .top-nav a:hover { text-decoration: underline; text-underline-offset: 6px; }
 
-/* 첫 화면 */
-.hero { padding-block: clamp(20px, 3vw, 40px) clamp(72px, 9vw, 136px); }
-.hero-grid { align-items: center; row-gap: 40px; }
-.hero-copy { grid-column: 1 / span 5; }
-.hero-title { font-size: clamp(2.375rem, 4.6vw, 4.25rem); font-weight: 600; line-height: 1.16; letter-spacing: -0.045em; }
-.hero-lead { margin-top: clamp(20px, 2.4vw, 32px); max-width: 25em; font-size: 1.0625rem; color: var(--mute); }
-.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; margin-top: 32px; }
-.hero-media { grid-column: 7 / span 6; }
-.hero-media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); background: var(--mist); }
-.tag { margin-top: clamp(40px, 6vw, 88px); max-width: 24em; border-top: 1px solid var(--ink); font-size: 0.8125rem; line-height: 1.5; }
-.tag > div { display: grid; grid-template-columns: 5em minmax(0, 1fr); gap: 12px; padding-block: 9px; border-bottom: 1px solid var(--line); }
+/* 첫 화면: 로고의 L과 O를 그대로 키우고, O 자리에 제품 사진을 넣는다 */
+.hero { padding-block: clamp(36px, 6vw, 88px) clamp(72px, 9vw, 136px); }
+.hero-grid { row-gap: clamp(32px, 5vw, 64px); }
+.hero-title { grid-column: 1 / span 7; grid-row: 1; font-size: clamp(2.75rem, 7.4vw, 6.75rem); font-weight: 700; line-height: 1.06; letter-spacing: -0.055em; color: #000; }
+.mark { grid-column: 8 / span 5; grid-row: 1 / span 2; position: relative; width: 100%; aspect-ratio: 1779 / 1850; }
+.mark-stem { position: absolute; left: 0; top: 0; width: 17.99%; height: 100%; background: #000; transform-origin: top; }
+.mark-foot { position: absolute; left: 0; bottom: 0; width: 100%; height: 17.3%; background: #000; transform-origin: left; }
+.mark-o { position: absolute; left: 32.6%; top: 0; width: 67.4%; height: 74.05%; border-radius: 9999px; overflow: hidden; background: var(--mist); }
+.mark-o img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.06); }
+.hero-foot { grid-column: 1 / span 7; grid-row: 2; align-self: end; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 3fr); gap: var(--gap) clamp(24px, 4vw, 64px); align-items: end; }
+.hero-lead { max-width: 26em; font-size: 1.0625rem; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 28px; }
+.tag { border-top: 1.5px solid #000; font-size: 0.8125rem; line-height: 1.5; }
+.tag > div { display: grid; grid-template-columns: 5em minmax(0, 1fr); gap: 12px; padding-block: 8px; border-bottom: 1px solid var(--line); }
 .tag dt { color: var(--mute); }
+.tag dd { font-weight: 500; }
 
 /* 구역 공통 */
 .sec { padding-block: clamp(72px, 9vw, 136px); }
@@ -105,7 +109,7 @@ a:focus-visible { outline: 3px solid var(--edge); outline-offset: 4px; }
 /* 브랜드 */
 .brand-grid { align-items: center; row-gap: 40px; }
 .brand-media { grid-column: 1 / span 6; }
-.brand-media img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--radius); background: var(--tile); }
+.brand-media img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 68%; border-radius: var(--radius); background: var(--mist); }
 .brand-copy { grid-column: 8 / span 5; }
 .brand-copy .statement { margin-top: 16px; }
 .principles { margin-top: clamp(32px, 4vw, 56px); border-bottom: 1px solid var(--line); }
@@ -148,14 +152,20 @@ a:focus-visible { outline: 3px solid var(--edge); outline-offset: 4px; }
 
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
+  .mark-stem { animation: draw-down .55s cubic-bezier(.3, .7, .2, 1) backwards; }
+  .mark-foot { animation: draw-right .55s .3s cubic-bezier(.3, .7, .2, 1) backwards; }
+  .mark-o { animation: settle .7s .55s cubic-bezier(.2, .7, .2, 1) backwards; }
+  @keyframes draw-down { from { transform: scaleY(0); } to { transform: none; } }
+  @keyframes draw-right { from { transform: scaleX(0); } to { transform: none; } }
+  @keyframes settle { from { transform: translateY(-9%); opacity: 0; } to { transform: none; opacity: 1; } }
 }
 
 @media (max-width: 900px) {
   html { scroll-padding-top: 16px; }
   .top { position: static; }
-  .hero-copy, .hero-media, .brand-media, .brand-copy, .head-row .h-xl, .head-row p, .item, .soon, .contact-grid .h-xl, .contact-cols { grid-column: 1 / -1; }
-  .hero-media { order: -1; }
-  .hero-media img { aspect-ratio: 1 / 1; object-position: 50% 62%; }
+  .hero-title, .mark, .hero-foot, .brand-media, .brand-copy, .head-row .h-xl, .head-row p, .item, .soon, .contact-grid .h-xl, .contact-cols { grid-column: 1 / -1; grid-row: auto; }
+  .mark { max-width: 440px; }
+  .hero-foot { grid-template-columns: minmax(0, 1fr); }
   .soon { aspect-ratio: auto; min-height: 280px; }
   .contact-cols { grid-template-columns: minmax(0, 1fr); }
   .biz { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -182,12 +192,21 @@ a:focus-visible { outline: 3px solid var(--edge); outline-offset: 4px; }
 <main>
   <section class="hero">
     <div class="wrap grid hero-grid">
-      <div class="hero-copy">
-        <h1 class="hero-title">매일 쓰는 물건,<br>르오망</h1>
-        <p class="hero-lead">르오망(LE OMANS)은 생활용품과 일상용품, 잡화를 다루는 리빙 브랜드입니다. 매일 손이 가는 물건을 하나씩 소개합니다.</p>
-        <div class="hero-actions">
-          <a class="btn" href="#products">제품 보기</a>
-          <a class="link" href="#brand">브랜드 소개</a>
+      <h1 class="hero-title">매일 쓰는 물건,<br>르오망</h1>
+
+      <div class="mark">
+        <span class="mark-stem" aria-hidden="true"></span>
+        <span class="mark-foot" aria-hidden="true"></span>
+        <span class="mark-o"><img src="assets/hero-pill.jpg" width="1000" height="1141" alt="투명한 제품에 인쇄된 르오망 로고. 로고의 L과 O 모양 안에 사진이 놓여 있다."></span>
+      </div>
+
+      <div class="hero-foot">
+        <div>
+          <p class="hero-lead">르오망(LE OMANS)은 생활용품과 일상용품, 잡화를 다루는 리빙 브랜드입니다. 매일 손이 가는 물건을 하나씩 소개합니다.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#products">제품 보기</a>
+            <a class="link" href="#brand">브랜드 소개</a>
+          </div>
         </div>
         <dl class="tag">
           <div><dt>브랜드</dt><dd>르오망 <span lang="en">LE OMANS</span></dd></div>
@@ -195,16 +214,13 @@ a:focus-visible { outline: 3px solid var(--edge); outline-offset: 4px; }
           <div><dt>판매처</dt><dd>쿠팡 / 네이버 스마트스토어</dd></div>
         </dl>
       </div>
-      <figure class="hero-media">
-        <img src="assets/scene-desk.jpg" width="1122" height="1402" alt="밝은 원목 책상 위에 놓인 르오망의 투명한 정리 용품. 흰색, 회색, 하늘색 책이 칸마다 꽂혀 있다.">
-      </figure>
     </div>
   </section>
 
   <section class="sec sec-mist" id="brand">
     <div class="wrap grid brand-grid">
       <figure class="brand-media">
-        <img src="assets/studio-close.jpg" width="1254" height="1254" loading="lazy" alt="르오망 로고가 인쇄된 투명한 제품을 가까이에서 본 모습.">
+        <img src="assets/scene-desk.jpg" width="1122" height="1402" loading="lazy" alt="밝은 원목 책상 위에 놓인 르오망의 투명한 정리 용품. 흰색, 회색, 하늘색 책이 칸마다 꽂혀 있다.">
       </figure>
       <div class="brand-copy">
         <h2 class="label">브랜드</h2>
